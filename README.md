@@ -5,6 +5,8 @@ Android gradient progress view
 [![](https://jitpack.io/v/zj565061763/gradient-view.svg)](https://jitpack.io/#zj565061763/gradient-view)
 
 # Example
+![](https://raw.githubusercontent.com/zj565061763/gradient-view/master/screenshot/demo.gif)
+
 ```java
 // 设置正常状态颜色
 view_gradient.setColorNormal(getResources().getColor(R.color.colorNormalStart), getResources().getColor(R.color.colorNormalEnd));
