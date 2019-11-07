@@ -101,9 +101,9 @@ public class FGradientView extends View
     {
         final float progress = mProgress;
 
-        final int colorStart = eval(mColorNormalStart, mColorProgressStart, progress);
-        final int colorEnd = eval(mColorNormalEnd, mColorProgressEnd, progress);
-        final int colorProgress = eval(colorStart, colorEnd, mProgress);
+        final int colorStart = eval(mColorNormalStart, mColorNormalEnd, progress);
+        final int colorEnd = eval(mColorProgressStart, mColorProgressEnd, progress);
+        final int colorProgress = eval(colorStart, colorEnd, progress);
 
         mGradient = new LinearGradient(0, 0, getMeasuredWidth(), 0,
                 new int[]{mColorProgressStart, colorProgress, mColorNormalEnd},
