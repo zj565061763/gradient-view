@@ -21,6 +21,8 @@ public class FGradientView extends View
 
     private float mProgress = 0.0f;
 
+    private Integer mColorEval;
+
     public FGradientView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
@@ -39,6 +41,7 @@ public class FGradientView extends View
         {
             mColorNormalStart = start;
             mColorNormalEnd = end;
+            calculateColorEval();
             invalidate();
         }
     }
@@ -55,6 +58,7 @@ public class FGradientView extends View
         {
             mColorProgressStart = start;
             mColorProgressEnd = end;
+            calculateColorEval();
             invalidate();
         }
     }
@@ -75,6 +79,7 @@ public class FGradientView extends View
         if (mProgress != progress)
         {
             mProgress = progress;
+            calculateColorEval();
             invalidate();
         }
     }
@@ -99,17 +104,25 @@ public class FGradientView extends View
 
     private void updateLinearGradient()
     {
+        if (mColorEval == null)
+            calculateColorEval();
+
+        mGradient = new LinearGradient(0, 0, getMeasuredWidth(), 0,
+                new int[]{mColorProgressStart, mColorEval, mColorNormalEnd},
+                new float[]{0.0f, mProgress, 1.0f}, Shader.TileMode.CLAMP);
+
+        mPaint.setShader(mGradient);
+    }
+
+    private void calculateColorEval()
+    {
         final float progress = mProgress;
 
         final int colorNormal = eval(mColorNormalStart, mColorNormalEnd, progress);
         final int colorProgress = eval(mColorProgressStart, mColorProgressEnd, progress);
         final int colorEval = eval(colorNormal, colorProgress, progress);
 
-        mGradient = new LinearGradient(0, 0, getMeasuredWidth(), 0,
-                new int[]{mColorProgressStart, colorEval, mColorNormalEnd},
-                new float[]{0.0f, progress, 1.0f}, Shader.TileMode.CLAMP);
-
-        mPaint.setShader(mGradient);
+        mColorEval = colorEval;
     }
 
     private static int eval(int startValue, int endValue, float fraction)
