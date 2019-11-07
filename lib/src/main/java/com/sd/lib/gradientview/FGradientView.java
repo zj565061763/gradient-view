@@ -28,22 +28,6 @@ public class FGradientView extends View
     }
 
     /**
-     * 设置进度颜色
-     *
-     * @param start
-     * @param end
-     */
-    public void setColorProgress(int start, int end)
-    {
-        if (mColorProgressStart != start || mColorProgressEnd != end)
-        {
-            mColorProgressStart = start;
-            mColorProgressEnd = end;
-            invalidate();
-        }
-    }
-
-    /**
      * 设置正常颜色
      *
      * @param start
@@ -55,6 +39,22 @@ public class FGradientView extends View
         {
             mColorNormalStart = start;
             mColorNormalEnd = end;
+            invalidate();
+        }
+    }
+
+    /**
+     * 设置进度颜色
+     *
+     * @param start
+     * @param end
+     */
+    public void setColorProgress(int start, int end)
+    {
+        if (mColorProgressStart != start || mColorProgressEnd != end)
+        {
+            mColorProgressStart = start;
+            mColorProgressEnd = end;
             invalidate();
         }
     }
@@ -94,7 +94,7 @@ public class FGradientView extends View
     {
         super.onDraw(canvas);
         updateLinearGradient();
-        canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
+        canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
     }
 
     private void updateLinearGradient()
