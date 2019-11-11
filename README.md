@@ -14,4 +14,6 @@ view_gradient.setColorNormal(getResources().getColor(R.color.colorNormalStart), 
 view_gradient.setColorProgress(getResources().getColor(R.color.colorProgressStart), getResources().getColor(R.color.colorProgressEnd));
 // 设置进度[0-1]
 view_gradient.setProgress(0.5f);
+// 设置渐变方向，默认水平渐变
+view_gradient.setOrientation(FGradientView.Orientation.Horizontal);
 ```
