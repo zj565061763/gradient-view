@@ -12,6 +12,7 @@ public class FGradientView extends View
 {
     private final Paint mPaint;
     private LinearGradient mGradient;
+    private Orientation mOrientation = Orientation.Horizontal;
 
     private int mColorProgressStart;
     private int mColorProgressEnd;
@@ -85,6 +86,23 @@ public class FGradientView extends View
     }
 
     /**
+     * 设置渐变方向{@link Orientation}
+     *
+     * @param orientation
+     */
+    public void setOrientation(Orientation orientation)
+    {
+        if (orientation == null)
+            throw new IllegalArgumentException("orientation is null");
+
+        if (mOrientation != orientation)
+        {
+            mOrientation = orientation;
+            invalidate();
+        }
+    }
+
+    /**
      * 返回当前进度
      *
      * @return
@@ -107,7 +125,10 @@ public class FGradientView extends View
         if (mColorEval == null)
             calculateColorEval();
 
-        mGradient = new LinearGradient(0, 0, getMeasuredWidth(), 0,
+        final int width = mOrientation == Orientation.Horizontal ? getWidth() : 0;
+        final int height = mOrientation == Orientation.Vertical ? getHeight() : 0;
+
+        mGradient = new LinearGradient(0, 0, width, height,
                 new int[]{mColorProgressStart, mColorEval, mColorNormalEnd},
                 new float[]{0.0f, mProgress, 1.0f}, Shader.TileMode.CLAMP);
 
@@ -143,5 +164,17 @@ public class FGradientView extends View
         int currentB = startB + (int) (fraction * (endB - startB));
 
         return currentA | currentR | currentG | currentB;
+    }
+
+    public enum Orientation
+    {
+        /**
+         * 水平方向
+         */
+        Horizontal,
+        /**
+         * 竖直方向
+         */
+        Vertical
     }
 }
