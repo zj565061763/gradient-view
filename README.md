@@ -6,6 +6,7 @@ Android gradient progress view
 
 # Example
 ![](https://thumbsnap.com/i/KwVCQybG.gif?1106)
+![](https://thumbsnap.com/i/X5zgYm9K.gif?1111)
 
 ```java
 // 设置正常状态颜色
